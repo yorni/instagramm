@@ -1,5 +1,5 @@
 class PicsController < ApplicationController
-	before_action :find_pic, only: [:show, :edit, :update, :destroy]
+	before_action :find_pic, only: [:show, :edit, :update, :destroy, :upvote]
 	before_action :authenticate_user!, except: [:index, :show]
 
 	def show
@@ -39,6 +39,11 @@ class PicsController < ApplicationController
 		end		
 	end
 
+
+	def upvote
+		@pic.upvote_by current_user
+		redirect_to :back
+	end	
 	private
 
 	def find_pic 
